@@ -1,0 +1,66 @@
+.event {
+  background-color: #ffffff;
+  height: 256px;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 12px;
+  border: dotted;
+  border-color: black;
+    .importance {
+      height: 100%;
+      width: 3px;
+      border-color: #a9d85f;
+    }
+    .time-place {
+      display: flex;
+      flex-direction: column;
+      order: 2;
+      border: dashed;
+      border-color: red;
+      flex: 0 1 31%;
+      .time {
+        border: solid;
+        border-color: green;
+        height: 50%;
+        font-size: 23px;
+        margin-left: 12%;
+      }
+      .place {
+        border: solid;
+        border-color: green;
+        height: 50%;
+      }
+    }
+    .caption-content {
+      display: flex;
+      flex-direction: column;
+      order: 2;
+      border: dashed;
+      border-color: red;
+      flex: 0 1 63%;
+      .caption {
+        border: solid;
+        border-color: green;
+        height: 50%;
+      }
+      .content{
+        border: solid;
+        border-color: green;
+        height: 50%;
+      }
+    }
+    .close {
+      display: flex;
+      flex-direction: column;
+      order: 1;
+      border: dashed;
+      border-color: red;
+      flex: 0 1 6%;
+      .close-icon {
+        border: solid;
+        border-color: green;
+        height: 50%;
+      }
+    }
+}

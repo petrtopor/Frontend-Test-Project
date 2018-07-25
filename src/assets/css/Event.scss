@@ -1,0 +1,122 @@
+.event {
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: #ffffff;
+  @media screen and (max-width: 767px)
+  {
+
+  }
+  @media screen and (min-width: 768px)
+  {
+
+  }
+  @media screen and (min-width: 1366px)
+  {
+    height: 138px;
+    margin-bottom: 12px;
+  }
+  .close {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 6%;
+    .close-icon {
+      background-image: url('./../img/closeCross.svg');
+      background-repeat: no-repeat;
+      align-self: center;
+      @media screen and (max-width: 767px)
+      {
+
+      }
+      @media screen and (min-width: 768px)
+      {
+
+      }
+      @media screen and (min-width: 1366px)
+      {
+        height: 15px;
+        width: 15px
+      }
+    }
+  }
+  .caption-content {
+    display: flex;
+    flex-direction: column;
+    .caption {
+      font-family: 'GothamProMedium';
+      @media screen and (max-width: 767px)
+      {
+        height: 50%;
+        font-size: 18pt!important;
+      }
+      @media screen and (min-width: 768px)
+      {
+        height: 50%;
+        font-size: 18pt!important;
+      }
+      @media screen and (min-width: 1366px)
+      {
+        height: 40%;
+        font-size: 18pt!important;
+      }
+    }
+    .content {
+      font-family: 'Times New Roman';
+      @media screen and (max-width: 767px)
+      {
+        height: 50%;
+        font-size: 14pt;
+      }
+      @media screen and (min-width: 768px)
+      {
+        height: 50%;
+        font-size: 14pt;
+      }
+      @media screen and (min-width: 1366px)
+      {
+        height: 60%;
+        font-size: 14pt;
+      }
+    }
+  }
+  .time-place {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 25%;
+    .time {
+      font-family: 'GothamProMedium';
+      @media screen and (max-width: 767px)
+      {
+        height: 50%;
+        font-size: 32pt;
+      }
+      @media screen and (min-width: 768px)
+      {
+        height: 50%;
+        font-size: 32pt;
+      }
+      @media screen and (min-width: 1366px)
+      {
+        height: 50%;
+        font-size: 32pt;
+      }
+    }
+    .place {
+      font-family: "GothamProRegular";
+      @media screen and (max-width: 767px)
+      {
+        height: 50%;
+        font-size: 14pt;
+      }
+      @media screen and (min-width: 768px)
+      {
+        height: 50%;
+        font-size: 14pt;
+      }
+      @media screen and (min-width: 1366px)
+      {
+        height: 50%;
+        font-size: 14pt;
+      }
+    }
+  }
+}

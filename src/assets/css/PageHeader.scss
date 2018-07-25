@@ -1,0 +1,254 @@
+header {
+  .v-toolbar {
+    background-image: url('./../img/headerBackground.png');
+    display: flex;
+    flex-direction: column;  
+    @media screen and (max-width: 767px)
+    {
+      height: 150px;
+    }
+    @media screen and (min-width: 768px)
+    {
+      height: 200px;
+    }
+    @media screen and (min-width: 1366px)
+    {
+      height: 300px;
+    }
+    .v-toolbar__content {
+      padding: 0;
+      .container {
+        padding-left: 0;
+        padding-top: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        @media screen and (max-width: 767px)
+        {
+          margin-left: 0;
+          max-width: 100%;
+        }
+        @media screen and (min-width: 768px)
+        {
+          margin-left: 10%;
+          max-width: 80%;
+        }
+        @media screen and (min-width: 1366px)
+        {
+          margin-left: 20%;
+          max-width: 60%;
+        }
+        .layout {
+          margin: 0;
+          .flex {
+            margin: 0;
+            #logo {
+              background-image: url('./../img/logo.png');
+              background-size: 100%;
+              @media screen and (max-width: 767px)
+              {
+                height: 19px;
+                width: 85px;
+                margin-top: 0px;
+              }
+              @media screen and (min-width: 768px)
+              {
+                height: 25px;
+                width: 112px;
+                margin-top: 20px;
+              }
+              @media screen and (min-width: 1366px)
+              {
+                height: 38px;
+                width: 169px;
+                margin-top: 49px;
+              }
+            }
+            #header-text {
+              font-family: GothamProBold;
+              color: #ffffff;
+              @media screen and (max-width: 767px)
+              {
+                font-size: 14pt;
+                margin-left: 10%;
+              }
+              @media screen and (min-width: 768px)
+              {
+                font-size: 18pt;
+                margin-left: 30%;
+              }
+              @media screen and (min-width: 1366px)
+              {
+                font-size: 26pt;
+                margin-left: 36%;
+              }
+              @media screen and (min-width: 1515px)
+              {
+                font-size: 28pt;
+                margin-left: 44%;
+              }
+            }
+            button {
+              font-family: GothamProBold;
+              color: #ffffff;
+              border-radius: 6px;
+              border-color: #a9d85f;
+              border-style: solid;
+              border-width: 3px;
+              box-shadow: none;
+              @media screen and (max-width: 767px)
+              {
+                height: 52px;
+                width: 40%;
+                margin-top: 10px;
+                font-size: 18pt;
+              }
+              @media screen and (min-width: 768px)
+              {
+                height: 42px;
+                width: 165px;
+                margin-top: 0px;
+                font-size: 20pt;
+              }
+              @media screen and (min-width: 895px)
+              {
+                height: 42px;
+                width: 165px;
+                margin-top: 20px;
+                font-size: 16pt;
+              }
+              @media screen and (min-width: 1366px)
+              {
+                height: 46px;
+                width: 165px;
+                margin-top: 0px;
+                font-size: 16pt;
+              }
+              @media screen and (min-width: 1878px)
+              {
+                height: 52px;
+                width: 165px;
+                margin-top: 42px;
+                font-size: 16pt;
+              }
+              &#button-add-event {
+                background-color: #a9d85f;
+                @media screen and (max-width: 767px)
+                {
+                  margin-right: 18%;
+                }
+                @media screen and (min-width: 768px)
+                {
+                  margin-right: 30px;
+                }
+                @media screen and (min-width: 1366px)
+                {
+                  margin-right: 30px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@font-face {
+      font-family: "GothamProRegular";
+      src: url("../fonts/GothamProRegular/GothamProRegular.eot");
+      src: url("../fonts/GothamProRegular/GothamProRegular.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProRegular/GothamProRegular.woff") format("woff"),
+      url("../fonts/GothamProRegular/GothamProRegular.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
+
+  @font-face {
+      font-family: "GothamProBold";
+      src: url("../fonts/GothamProBold/GothamProBold.eot");
+      src: url("../fonts/GothamProBold/GothamProBold.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProBold/GothamProBold.woff") format("woff"),
+      url("../fonts/GothamProBold/GothamProBold.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
+
+  @font-face {
+      font-family: "GothamProBlack";
+      src: url("../fonts/GothamProBlack/GothamProBlack.eot");
+      src: url("../fonts/GothamProBlack/GothamProBlack.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProBlack/GothamProBlack.woff") format("woff"),
+      url("../fonts/GothamProBlack/GothamProBlack.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
+
+  @font-face {
+      font-family: "GothamProItalic";
+      src: url("../fonts/GothamProItalic/GothamProItalic.eot");
+      src: url("../fonts/GothamProItalic/GothamProItalic.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProItalic/GothamProItalic.woff") format("woff"),
+      url("../fonts/GothamProItalic/GothamProItalic.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
+
+  @font-face {
+      font-family: "GothamProMedium";
+      src: url("../fonts/GothamProMedium/GothamProMedium.eot");
+      src: url("../fonts/GothamProMedium/GothamProMedium.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProMedium/GothamProMedium.woff") format("woff"),
+      url("../fonts/GothamProMedium/GothamProMedium.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
+
+  @font-face {
+      font-family: "GothamProLight";
+      src: url("../fonts/GothamProLight/GothamProLight.eot");
+      src: url("../fonts/GothamProLight/GothamProLight.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProLight/GothamProLight.woff") format("woff"),
+      url("../fonts/GothamProLight/GothamProLight.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
+
+  @font-face {
+      font-family: "GothamProMediumItalic";
+      src: url("../fonts/GothamProMediumItalic/GothamProMediumItalic.eot");
+      src: url("../fonts/GothamProMediumItalic/GothamProMediumItalic.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProMediumItalic/GothamProMediumItalic.woff") format("woff"),
+      url("../fonts/GothamProMediumItalic/GothamProMediumItalic.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
+
+  @font-face {
+      font-family: "GothamProLightItalic";
+      src: url("../fonts/GothamProLightItalic/GothamProLightItalic.eot");
+      src: url("../fonts/GothamProLightItalic/GothamProLightItalic.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProLightItalic/GothamProLightItalic.woff") format("woff"),
+      url("../fonts/GothamProLightItalic/GothamProLightItalic.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
+
+  @font-face {
+      font-family: "GothamProBoldItalic";
+      src: url("../fonts/GothamProBoldItalic/GothamProBoldItalic.eot");
+      src: url("../fonts/GothamProBoldItalic/GothamProBoldItalic.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProBoldItalic/GothamProBoldItalic.woff") format("woff"),
+      url("../fonts/GothamProBoldItalic/GothamProBoldItalic.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
+
+  @font-face {
+      font-family: "GothamProBlackItalic";
+      src: url("../fonts/GothamProBlackItalic/GothamProBlackItalic.eot");
+      src: url("../fonts/GothamProBlackItalic/GothamProBlackItalic.eot?#iefix")format("embedded-opentype"),
+      url("../fonts/GothamProBlackItalic/GothamProBlackItalic.woff") format("woff"),
+      url("../fonts/GothamProBlackItalic/GothamProBlackItalic.ttf") format("truetype");
+      font-style: normal;
+      font-weight: normal;
+  }
