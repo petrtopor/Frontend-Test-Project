@@ -18,7 +18,7 @@
         </v-layout>
         <v-layout>
           <v-flex>
-            <button id="button-add-event">Событие +</button>
+            <button id="button-add-event" @click="eventAddButtonClick">Событие +</button>
             <button id="button-refresh" @click="refreshButtonClick">Обновить</button>
           </v-flex>
         </v-layout>
@@ -39,6 +39,9 @@
       }
     },
     methods: {
+      eventAddButtonClick: function () {
+        this.$emit('event_create')
+      },
       refreshButtonClick: function () {
         this.$store.dispatch('pushEventsToServer')
       }

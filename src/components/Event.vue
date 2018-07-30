@@ -85,7 +85,7 @@
         // var action = ''
         var th = this
         var animationComplete = function () {
-          alert('Animation complete with no further event emission')
+          // alert('Animation complete with no further event emission')
         }
         var emitEditEvent = function () {
           // alert('Now it\'s time to emit event...')

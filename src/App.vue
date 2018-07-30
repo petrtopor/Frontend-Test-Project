@@ -2,7 +2,7 @@
   <v-app>
     <event-add-dialog @event_add="eventAddHandle"/>
 
-    <page-header/>
+    <page-header @event_create="createNewEvent"/>
 
     <page-content :events="events" @event_edit="eventEditHandle"/>
     
@@ -41,8 +41,25 @@ export default {
     }
   },
   methods: {
+    createNewEvent: function () {
+      var emptyEvent = {
+        'Caption': '',
+        'Content': '',
+        'Location': '',
+        'Time': '',
+        'Date': '',
+        'MapCoordinates': {
+          'Latitude': '',
+          'Longitude': ''
+        }
+      }
+      this.eventToEdit = Object.assign({}, emptyEvent)
+      this.$store.dispatch('setCurrentEditingEvent', this.eventToEdit)
+      this.$forceUpdate()
+      this.$store.dispatch('setIsAddDialogVisible', true)
+    },
     eventEditHandle: function (event) {
-      console.log('Event came from PageContent: \n', event)
+      console.log('Event came from PageContent or PageHeader: \n', event)
       this.$nextTick(function () {
         this.eventToEdit = Object.assign({}, event)
         this.$store.dispatch('setCurrentEditingEvent', this.eventToEdit)

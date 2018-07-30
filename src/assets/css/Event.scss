@@ -41,6 +41,7 @@
   .caption-content {
     display: flex;
     flex-direction: column;
+    flex: 0 0 69%;
     .caption {
       font-family: 'GothamProMedium';
       @media screen and (max-width: 767px)
@@ -55,7 +56,7 @@
       }
       @media screen and (min-width: 1366px)
       {
-        height: 40%;
+        max-height: 40%;
         font-size: 18pt!important;
       }
     }
@@ -96,7 +97,7 @@
       }
       @media screen and (min-width: 1366px)
       {
-        height: 50%;
+        height: 35%;
         font-size: 32pt;
       }
     }
@@ -114,7 +115,8 @@
       }
       @media screen and (min-width: 1366px)
       {
-        height: 50%;
+        height: 65%;
+        text-align: bottom;
         font-size: 14pt;
       }
     }

@@ -4,7 +4,7 @@
       <v-container grid-list-md style="background-color: white;">
         <v-layout wrap>
           <v-flex xl12 lg12 md12>
-            <v-text-field label="Событие" required="true" v-model="caption"></v-text-field>
+            <v-text-field label="Событие" required="true" v-model="caption" maxlength="40"></v-text-field>
           </v-flex>
         </v-layout>
         <v-layout wrap align-baseline>
@@ -50,7 +50,8 @@
               >
               <div id="map" style="width: 600px; height: 400px"></div>
               <div class="map-buttons">
-                <v-btn>Выбрать место</v-btn>
+                <v-btn @click="mapPlacePicked">Выбрать место</v-btn>
+                <v-btn @click="mapAutodetectPositionClick">Определить автоматически</v-btn>
                 <v-btn>Отмена</v-btn>
               </div>
             </v-dialog>
@@ -79,7 +80,7 @@
         </v-layout>
         <v-layout>
           <v-flex xl12 lg12 md12>
-            <v-textarea id="description" label="Описание" required="true" v-model="content"></v-textarea>
+            <v-textarea id="description" label="Описание" required="true" v-model="content" maxlength="250"></v-textarea>
           </v-flex>
         </v-layout>
         <v-layout>
@@ -105,10 +106,16 @@
   import Vuetify from 'vuetify'
   import 'vuetify/dist/vuetify.min.css'
   import store from './../store'
+  import './../assets/css/EventAddDialog.scss'
   Vue.use(Vuetify)
   export default {
     name: 'EventAddDialog',
     store,
+    watch: {
+      caption: function (newCaption, oldCaption) {
+        //
+      }
+    },
     data () {
       return {
         dialog: false,
@@ -120,7 +127,8 @@
         timeModel: null,
         event: {},
         YMapsScript: null,
-        map: null
+        map: null,
+        mapPlacemark: null
       }
     },
     updated: function () {
@@ -136,20 +144,54 @@
       })
     },
     methods: {
+      mapAutodetectPositionClick: function () {
+        var YMapsScript = this.YMapsScript
+        YMapsScript.geolocation.get({provider: 'browser'}).then((result) => {
+          // console.log(result.geoObjects.get(0).getAddressLine())
+          this.location = result.geoObjects.get(0).getAddressLine()
+          // this.event.MapCoordinates.Latitude = result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData.InternalToponymInfo.Point.coordinates[0]
+          // this.event.MapCoordinates.Longitude = result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData.InternalToponymInfo.Point.coordinates[1]
+          this.mapPlacemark.geometry.setCoordinates(result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData.InternalToponymInfo.Point.coordinates)
+          // console.log(result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData.InternalToponymInfo.Point.coordinates)
+        })
+      },
+      addressLine: function () {
+        var YMapsScript = this.YMapsScript
+        var mapPlacemark = this.mapPlacemark
+        return new Promise(function (resolve, reject) {
+          YMapsScript.geocode(mapPlacemark.geometry.getCoordinates()).then(function (res) {
+            resolve(res.geoObjects.get(0).getAddressLine())
+          })
+        })
+      },
+      mapPlacePicked: function () {
+        this.event.MapCoordinates.Latitude = this.mapPlacemark.geometry.getCoordinates()[0]
+        this.event.MapCoordinates.Longitude = this.mapPlacemark.geometry.getCoordinates()[1]
+        this.addressLine().then((addrLine) => {
+          this.location = addrLine
+          this.MapDialogVisible = false
+        })
+      },
       mapClickEventHandler: function (event) {
-        if (!this.map.balloon.isOpen()) {
-          var coordinates = event.get('coords')
-          this.map.balloon.open(coordinates, {
-            contentHeader: 'Место выбрано на карте',
-            contentBody: 'Широта: ' + coordinates[0].toPrecision(4) + ', долгота: ' + coordinates[1].toPrecision(4)})
-        } else {
-          this.map.balloon.close()
-        }
+        var coordinates = event.get('coords')
+        this.mapPlacemark.geometry.setCoordinates(coordinates)
       },
       showMap: function () {
-        this.map = new this.YMapsScript.Map('map', {center: [55.76, 37.64], zoom: 7}, {balloonMaxWidth: 200})
+        var center = [0, 0]
+        if (this.event.MapCoordinates !== null && this.event.MapCoordinates !== 'undefined') {
+          center[0] = this.event.MapCoordinates.Latitude
+          center[1] = this.event.MapCoordinates.Longitude
+        } else {
+          center[0] = 55.76
+          center[1] = 37.64
+        }
+        if (this.map === 'undefined' || this.map === null) {
+          this.map = new this.YMapsScript.Map('map', {center: center, zoom: 7}, {balloonMaxWidth: 200})
+          this.map.events.add('click', this.mapClickEventHandler)
+          this.mapPlacemark = new this.YMapsScript.Placemark([this.event.MapCoordinates.Latitude, this.event.MapCoordinates.Longitude], {hintContent: 'Место события на карте', balloonContent: 'Поменять место можно кликнув в любом месте карты и нажав "Выбрать место"'})
+          this.map.geoObjects.add(this.mapPlacemark)
+        }
         this.MapDialogVisible = true
-        this.map.events.add('click', this.mapClickEventHandler)
       },
       fetchYMapsScript: function () {
         return new Promise(function (resolve, reject) {
