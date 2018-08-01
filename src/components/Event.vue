@@ -82,45 +82,32 @@
         }
       },
       onEndListener: function (event) {
-        // var action = ''
         var th = this
         var animationComplete = function () {
-          // alert('Animation complete with no further event emission')
+          //
         }
         var emitEditEvent = function () {
-          // alert('Now it\'s time to emit event...')
           th.$nextTick(function () {
             th.$emit('event_edit', th.event)
           })
         }
+        var emitDeleteEvent = function () {
+          console.log('emitDeleteEvent emitted')
+          th.$nextTick(function () {
+            th.$emit('event_delete', th.event)
+          })
+        }
         if (this.direction === 'left') {
-          // alert('сейчас будем редактировать событие...')
-          // this.$nextTick(function () {
-          // this.$emit('event_edit', this.event)
-          // this.show = false
           animationComplete = emitEditEvent
-          // })
         }
         if (this.direction === 'right' && this.shift >= (event.target.offsetWidth / 4)) {
+          animationComplete = emitDeleteEvent
           this.show = false
         } else {
           TweenMax.to(event.target, 0.5, {x: 0})
         }
         TweenMax.to(event.target, 0.9, {opacity: 1, onComplete: animationComplete})
         this.touched = false
-        /* if (action === 'edit') {
-          this.$nextTick(function () {
-            this.$emit('event_edit', this.event)
-          })
-        } */
-        /*
-        this.$nextTick(function () {
-          if (this.desiredAction === 'edit') {
-            this.$nextTick(function () {
-              this.$emit('event_edit', this.event)
-            })
-          }
-        }) */
       }
     },
     props: {

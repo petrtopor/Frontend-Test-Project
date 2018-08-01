@@ -2,7 +2,12 @@
   display: flex;
   flex-direction: row-reverse;
   background-color: #ffffff;
-  @media screen and (max-width: 767px)
+  @media screen and (max-width: 340px)
+  {
+    height: 138px;
+    margin-bottom: 10px;
+  }
+  @media screen and (min-width: 767px)
   {
 
   }
@@ -44,7 +49,12 @@
     flex: 0 0 69%;
     .caption {
       font-family: 'GothamProMedium';
-      @media screen and (max-width: 767px)
+      @media screen and (max-width: 340px)
+      {
+        height: 25%;
+        font-size: 10pt!important;
+      }
+      @media screen and (min-width: 767px)
       {
         height: 50%;
         font-size: 18pt!important;
@@ -62,7 +72,12 @@
     }
     .content {
       font-family: 'Times New Roman';
-      @media screen and (max-width: 767px)
+      @media screen and (max-width: 340px)
+      {
+        height: 75%;
+        font-size: 8pt!important;
+      }
+      @media screen and (min-width: 767px)
       {
         height: 50%;
         font-size: 14pt;
@@ -85,7 +100,13 @@
     flex: 0 0 25%;
     .time {
       font-family: 'GothamProMedium';
-      @media screen and (max-width: 767px)
+      @media screen and (max-width: 340px)
+      {
+        height: 30%;
+        font-size: 16pt;
+        margin-left: 10px;
+      }
+      @media screen and (min-width: 767px)
       {
         height: 50%;
         font-size: 32pt;
@@ -103,7 +124,13 @@
     }
     .place {
       font-family: "GothamProRegular";
-      @media screen and (max-width: 767px)
+      @media screen and (max-width: 340px)
+      {
+        height: 70%;
+        font-size: 10pt;
+        margin-left: 8px;
+      }
+      @media screen and (min-width: 767px)
       {
         height: 50%;
         font-size: 14pt;

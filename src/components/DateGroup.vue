@@ -1,7 +1,7 @@
 <template>
   <div class="date-group">
     {{date}}
-    <event v-for="event in events" :event=event @event_edit="eventEditHandle"/>
+    <event v-for="event in events" :event=event @event_edit="eventEditHandle" @event_delete="eventDeleteHandle"/>
   </div>
 </template>
 <script>
@@ -35,6 +35,10 @@
       }
     },
     methods: {
+      eventDeleteHandle: function (event) {
+        console.log('Event came from eventDeleteHandle: \n', event)
+        this.$emit('event_delete', event)
+      },
       eventEditHandle: function (event) {
         console.log('Event came from eventEditHandle: \n', event)
         this.$emit('event_edit', event)

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from './../firebase'
+import _ from 'lodash'
 
 Vue.use(Vuex)
 
@@ -10,10 +11,78 @@ export default new Vuex.Store(
     {
       events: [],
       isAddEventDialogVisible: false,
-      currentEditingEvent: {}
+      currentEditingEvent: {},
+      currentUser: {},
+      superUser: 'root@root.root',
+      fakeData: [
+        {
+          'Caption': 'Мы очень круто отдохнули с Марусей!',
+          'Content': 'Моя мама очень трудолюбивая и успешная женщина. Однажды она призналась мне, что считает лень — болезнью. Поэтому, когда человек ленится, его надо оставить в пок... \tзаварить чай с малиной. Сейчас она болеет ленью. Это так мило!',
+          'Location': 'Румыния, Район берегов Лос-Сантес',
+          'Time': '19:30',
+          'Date': '19 июня',
+          'MapCoordinates': {
+            'Latitude': 54.25,
+            'Longitude': 48.29
+          },
+          'email': 'root@root.root'
+        },
+        {
+          'Caption': 'Мы очень круто отдохнули с Марусей!',
+          'Content': 'Моя мама очень трудолюбивая и успешная женщина. Однажды она призналась мне, что считает лень — болезнью. Поэтому, когда человек ленится, его надо оставить в пок... \tзаварить чай с малиной. Сейчас она болеет ленью. Это так мило!',
+          'Location': 'Румыния, Район берегов Лос-Сантес',
+          'Time': '19:30',
+          'Date': '19 июня',
+          'MapCoordinates': {
+            'Latitude': 54.25,
+            'Longitude': 48.29
+          },
+          'email': 'root@root.root'
+        },
+        {
+          'Caption': 'Мы очень круто отдохнули с Марусей!',
+          'Content': 'Моя мама очень трудолюбивая и успешная женщина. Однажды она призналась мне, что считает лень — болезнью. Поэтому, когда человек ленится, его надо оставить в пок... \tзаварить чай с малиной. Сейчас она болеет ленью. Это так мило!',
+          'Location': 'Румыния, Район берегов Лос-Сантес',
+          'Time': '19:30',
+          'Date': '19 июня',
+          'MapCoordinates': {
+            'Latitude': 54.25,
+            'Longitude': 48.29
+          },
+          'email': 'root@root.root'
+        },
+        {
+          'Caption': 'Мы очень круто отдохнули с Марусей!',
+          'Content': 'Моя мама очень трудолюбивая и успешная женщина. Однажды она призналась мне, что считает лень — болезнью. Поэтому, когда человек ленится, его надо оставить в пок... \tзаварить чай с малиной. Сейчас она болеет ленью. Это так мило!',
+          'Location': 'Румыния, Район берегов Лос-Сантес',
+          'Time': '19:30',
+          'Date': '19 июня',
+          'MapCoordinates': {
+            'Latitude': 54.25,
+            'Longitude': 48.29
+          },
+          'email': 'root@root.root'
+        }
+      ]
     },
     mutations:
     {
+      // Actualize fake data
+      FAKE_DATA (state) {
+        // state.currentUser = state.superUser
+        state.currentUser = {
+          user: {
+            user: {
+              email: 'root@root.root'
+            }
+          }
+        }
+        state.events = state.fakeData
+        console.log(state.fakeData)
+      },
+      SET_CURRENT_USER (state, user) {
+        state.currentUser = user
+      },
       ADD_EVENTS (state, events) {
         state.events = events
       },
@@ -39,11 +108,29 @@ export default new Vuex.Store(
     },
     actions:
     {
+      fakeData (context) {
+        // just execute the fake data mutation
+        console.log('fakeData action dispatched')
+        context.commit('FAKE_DATA')
+      },
+      setCurrentUser (context, user) {
+        context.commit('SET_CURRENT_USER', user)
+      },
+      fetchEventsFromServerByEmail (context, email) {
+        // firebase.database().ref('Events').orderByChild('email').equalTo(email).once('value').then(snapshot => context.commit('ADD_EVENTS', snapshot.val())).catch(err => console.log(err))
+        firebase.database().ref('Events').orderByChild('email').equalTo(email).once('value').then(snapshot => snapshot.forEach((snapshotItem) => {
+          // console.log('snapshotItem.val(): ', snapshotItem.val())
+          context.commit('ADD_SINGLE_EVENT_MANUALLY', snapshotItem.val())
+        })).catch(err => console.log(err))
+      },
       fetchEventsFromServer (context) {
-        firebase.database().ref('Events').once('value').then(snapshot => context.commit('ADD_EVENTS', snapshot.val())).catch(err => console.log(err))
+        console.log('fetchEventsFromServer dispatched')
+        firebase.database().ref('Events').once('value').then(snapshot => context.commit('ADD_EVENTS', snapshot.val())).catch(err => {
+          console.log('error happened: ', err)
+          context.commit('FAKE_DATA')
+        })
       },
       pushEventsToServer (context) {
-        alert('pushEventsToServer dispatched')
         firebase.database().ref('Events').set(this.state.events).then(() => console.log('События успешно загружены на сервер в БД')).catch(() => console.log('ОШИБКА при загрузке данных на сервер в БД'))
       },
       addSingleEventManually (context, event) {
@@ -69,6 +156,18 @@ export default new Vuex.Store(
     },
     getters:
     {
+      superUser (state) {
+        return state.superUser
+      },
+      currentUserEmail (state) {
+        // return state.currentUser.user.email
+        // return 'ololo'
+        if (_.isEmpty(state.currentUser)) {
+          return ''
+        } else {
+          return state.currentUser.user.email
+        }
+      },
       events (state) {
         return state.events
       },

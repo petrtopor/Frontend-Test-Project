@@ -9,7 +9,7 @@
         </v-layout>
         <v-layout wrap align-baseline>
           <v-flex xl7 lg7 md7>
-            <v-text-field label="Место" required="true" v-model="location"></v-text-field>
+            <v-text-field id="place" label="Место" required="true" v-model="location"></v-text-field>
           </v-flex>
           <v-flex xl1 lg1 md1>
             <v-icon style="color: #a9d85f;" @click="showMap">fas fa-globe</v-icon>
@@ -192,6 +192,7 @@
           this.map.geoObjects.add(this.mapPlacemark)
         }
         this.MapDialogVisible = true
+        this.event.email = this.$store.getters.currentUserEmail
       },
       fetchYMapsScript: function () {
         return new Promise(function (resolve, reject) {
